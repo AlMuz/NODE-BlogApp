@@ -1,7 +1,14 @@
 const express = require('express');
+const path = require('path');
 
 const app = new express();
 
-app.listen(3000, () => {
-  console.log('App listening on port 3000');
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'pages/index.html'))
+})
+
+app.listen(5555, () => {
+  console.log('App listening on port 5555');
 });
