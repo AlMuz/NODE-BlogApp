@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nodejs-service:
+    container_name: nodejs
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5555:5555
+    links:
+      - database-service 
+    depends_on:
+      - database-service
+    command: npm start
+  database-service:
+    container_name: mongodb
+    image: mongo
