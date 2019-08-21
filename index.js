@@ -55,7 +55,18 @@ app.get('/post/:id', async (req, res) => {
   })
 })
 
-app.post('/posts/store', upload.single('image'), (req, res) => {
+app.post('/posts/store', upload.single('image'), (req, res, next) => {
+  if (
+      !req.file ||
+      !req.body.title ||
+      !req.body.description ||
+      !req.body.content ||
+      !req.body.username
+    ) {
+      return res.redirect('/post/new');
+  }
+  next();
+}, (req, res) => {
   Post.create({
     ...req.body,
     image: `/posts/${req.file.filename}`
