@@ -29,6 +29,10 @@ app.get('/post', (req, res) => {
   res.render('post')
 })
 
+app.get('/post/new', (req, res) => {
+  res.render('create')
+})
+
 app.listen(5555, () => {
   console.log('App listening on port 5555');
 });
