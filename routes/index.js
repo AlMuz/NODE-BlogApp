@@ -1,26 +1,20 @@
 const path = require('path');
 const appDir = path.dirname(require.main.filename);
-const Post = require(appDir + '/database/models/Post');
+
 const postsController = require(appDir + '/controllers/postsController');
+const homeController = require(appDir + '/controllers/homeController');
+const aboutController = require(appDir + '/controllers/aboutController');
+const contactController = require(appDir + '/controllers/contactController');
 
 const upload = require(appDir + '/config/uploadFile');
 
 module.exports = function (app) {
 
-  app.get('/', async (req, res) => {
-    const posts = await Post.find({})
-    res.render('index', {
-      posts
-    })
-  })
+  app.get('/', homeController.index)
 
-  app.get('/about', (req, res) => {
-    res.render('about')
-  })
+  app.get('/about', aboutController.index)
 
-  app.get('/contact', (req, res) => {
-    res.render('contact')
-  })
+  app.get('/contact', contactController.index)
 
   app.get('/post/new', postsController.new)
 
