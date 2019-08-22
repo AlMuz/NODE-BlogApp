@@ -25,6 +25,8 @@ module.exports = function (app) {
 
   app.post('/users/login', redirectIfAuthenticated, usersController.doLogin)
 
+  app.get('/users/logout', auth, usersController.logout)
+
   app.get('/about', aboutController.index)
 
   app.get('/contact', contactController.index)

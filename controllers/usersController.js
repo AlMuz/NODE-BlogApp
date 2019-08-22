@@ -48,5 +48,10 @@ module.exports = {
         return res.redirect('/users/login')
       }
     })
+  },
+  logout: function(req, res) {
+    req.session.destroy(() => {
+      res.redirect('/')
+    })
   }
 };
