@@ -1,18 +1,8 @@
 const path = require('path');
-const multer  = require('multer')
 const appDir = path.dirname(require.main.filename);
 const Post = require(appDir + '/database/models/Post');
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/posts/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-  }
-})
-
-var upload = multer({ storage: storage })
+const upload = require(appDir + '/config/uploadFile');
 
 module.exports = function (app) {
 
