@@ -5,6 +5,7 @@ const postsController = require(appDir + '/controllers/postsController');
 const homeController = require(appDir + '/controllers/homeController');
 const aboutController = require(appDir + '/controllers/aboutController');
 const contactController = require(appDir + '/controllers/contactController');
+const usersController = require(appDir + '/controllers/usersController');
 
 const validateCreatePostMiddleware = require(appDir + '/middleware/validatePost.js');
 
@@ -13,6 +14,8 @@ const upload = require(appDir + '/config/uploadFile');
 module.exports = function (app) {
 
   app.get('/', homeController.index)
+
+  app.get('/users/register', usersController.register)
 
   app.get('/about', aboutController.index)
 

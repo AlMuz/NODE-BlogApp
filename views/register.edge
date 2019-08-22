@@ -1,0 +1,48 @@
+@layout('layouts.app')
+
+@section('content')
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Create a new accout</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <form action="/users/register" method="post" enctype="multipart/form-data">
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controlls">
+              <label for="title">Username</label>
+              <input type="text" placeholder="Username" name="username" class="form-control">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controlls">
+              <label for="email">Email</label>
+              <input type="email" placeholder="Email" name="email" class="form-control">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controlls">
+              <label for="description">Password</label>
+              <input type="password" placeholder="Password" name="password" class="form-control">
+            </div>
+          </div>
+          <div class="form-group text-center my-4">
+            <button type="submit" name="button" class="btn btn-primary">Register now!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</article>
+@endsection
