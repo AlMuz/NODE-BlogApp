@@ -9,6 +9,10 @@ module.exports = {
   },
   create: function(req, res){
     User.create(req.body, (error, post) => {
+
+      if (error) {
+        return res.redirect('/users/register')
+      }
       res.redirect('/')
     })
   }
