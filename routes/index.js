@@ -1,6 +1,7 @@
 const path = require('path');
 const appDir = path.dirname(require.main.filename);
 const Post = require(appDir + '/database/models/Post');
+const postsController = require(appDir + '/controllers/postsController');
 
 const upload = require(appDir + '/config/uploadFile');
 
@@ -21,16 +22,9 @@ module.exports = function (app) {
     res.render('contact')
   })
 
-  app.get('/post/new', (req, res) => {
-    res.render('create')
-  })
+  app.get('/post/new', postsController.new)
 
-  app.get('/post/:id', async (req, res) => {
-    const post = await Post.findById(req.params.id)
-    res.render('post', {
-      post
-    })
-  })
+  app.get('/post/:id', postsController.view)
 
   app.post('/posts/store', upload.single('image'), (req, res, next) => {
     if (
@@ -43,13 +37,6 @@ module.exports = function (app) {
         return res.redirect('/post/new');
     }
     next();
-  }, (req, res) => {
-    Post.create({
-      ...req.body,
-      image: `/posts/${req.file.filename}`
-    }, (error, post) => {
-      res.redirect('/')
-    })
-  })
+  }, postsController.create)
 
 }
