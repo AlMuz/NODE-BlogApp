@@ -6,6 +6,8 @@ const homeController = require(appDir + '/controllers/homeController');
 const aboutController = require(appDir + '/controllers/aboutController');
 const contactController = require(appDir + '/controllers/contactController');
 
+const validateCreatePostMiddleware = require(appDir + '/middleware/validatePost.js');
+
 const upload = require(appDir + '/config/uploadFile');
 
 module.exports = function (app) {
@@ -20,17 +22,6 @@ module.exports = function (app) {
 
   app.get('/post/:id', postsController.view)
 
-  app.post('/posts/store', upload.single('image'), (req, res, next) => {
-    if (
-        !req.file ||
-        !req.body.title ||
-        !req.body.description ||
-        !req.body.content ||
-        !req.body.username
-      ) {
-        return res.redirect('/post/new');
-    }
-    next();
-  }, postsController.create)
+  app.post('/posts/store', upload.single('image'), validateCreatePostMiddleware, postsController.create)
 
 }
