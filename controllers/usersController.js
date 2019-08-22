@@ -8,7 +8,7 @@ module.exports = {
     res.render('register')
   },
   create: function(req, res){
-    Post.create(req.body, (error, post) => {
+    User.create(req.body, (error, post) => {
       res.redirect('/')
     })
   }

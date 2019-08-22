@@ -17,7 +17,7 @@ module.exports = function (app) {
 
   app.get('/users/register', usersController.register)
 
-  app.post('/users/create', usersController.create)
+  app.post('/users/register', usersController.create)
 
   app.get('/about', aboutController.index)
 
