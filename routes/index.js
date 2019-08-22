@@ -9,6 +9,7 @@ const usersController = require(appDir + '/controllers/usersController');
 
 const validateCreatePostMiddleware = require(appDir + '/middleware/validatePost');
 const auth = require(appDir + '/middleware/auth');
+const redirectIfAuthenticated = require(appDir + '/middleware/redirectIfAuthenticated');
 
 const upload = require(appDir + '/config/uploadFile');
 
@@ -16,13 +17,13 @@ module.exports = function (app) {
 
   app.get('/', homeController.index)
 
-  app.get('/users/register', usersController.register)
+  app.get('/users/register', redirectIfAuthenticated, usersController.register)
 
-  app.post('/users/register', usersController.create)
+  app.post('/users/register', redirectIfAuthenticated, usersController.create)
 
-  app.get('/users/login', usersController.login)
+  app.get('/users/login', redirectIfAuthenticated, usersController.login)
 
-  app.post('/users/login', usersController.doLogin)
+  app.post('/users/login', redirectIfAuthenticated, usersController.doLogin)
 
   app.get('/about', aboutController.index)
 
