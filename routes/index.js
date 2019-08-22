@@ -19,6 +19,10 @@ module.exports = function (app) {
 
   app.post('/users/register', usersController.create)
 
+  app.get('/users/login', usersController.login)
+
+  app.post('/users/login', usersController.doLogin)
+
   app.get('/about', aboutController.index)
 
   app.get('/contact', contactController.index)

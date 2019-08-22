@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const path = require('path');
 
 const appDir = path.dirname(require.main.filename);
@@ -14,6 +15,28 @@ module.exports = {
         return res.redirect('/users/register')
       }
       res.redirect('/')
+    })
+  },
+  login: function(req, res){
+    res.render('login')
+  },
+  doLogin: function(req, res) {
+
+    const { email, password } = req.body;
+
+    User.findOne({ email }, (error, user) => {
+      if (user) {
+
+        bcrypt.compare(password, user.password, (error, result) => {
+          if (result) {
+            return res.redirect('/')
+          }else {
+            return res.redirect('/users/login')
+          }
+        })
+      }else {
+        return res.redirect('/users/login')
+      }
     })
   }
 };
