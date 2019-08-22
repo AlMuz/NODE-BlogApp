@@ -7,7 +7,8 @@ const aboutController = require(appDir + '/controllers/aboutController');
 const contactController = require(appDir + '/controllers/contactController');
 const usersController = require(appDir + '/controllers/usersController');
 
-const validateCreatePostMiddleware = require(appDir + '/middleware/validatePost.js');
+const validateCreatePostMiddleware = require(appDir + '/middleware/validatePost');
+const auth = require(appDir + '/middleware/auth');
 
 const upload = require(appDir + '/config/uploadFile');
 
@@ -27,10 +28,10 @@ module.exports = function (app) {
 
   app.get('/contact', contactController.index)
 
-  app.get('/post/new', postsController.new)
+  app.get('/post/new', auth, postsController.new)
 
   app.get('/post/:id', postsController.view)
 
-  app.post('/posts/store', upload.single('image'), validateCreatePostMiddleware, postsController.create)
+  app.post('/posts/store', auth, upload.single('image'), validateCreatePostMiddleware, postsController.create)
 
 }
