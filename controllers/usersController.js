@@ -7,7 +7,8 @@ const User = require(appDir + '/database/models/User');
 module.exports = {
   register: function(req, res){
     res.render('register', {
-      errors: req.flash('regErrors')
+      errors: req.flash('regErrors'),
+      data: req.flash('data')[0]
     })
   },
   create: function(req, res){
@@ -17,6 +18,7 @@ module.exports = {
         const regErrors = Object.keys(error.errors).map(key => error.errors[key].message);
 
         req.flash('regErrors', regErrors);
+        req.flash('data', req.body);
 
         return res.redirect('/users/register')
       }
