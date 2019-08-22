@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 
 const UserSchema = mongoose.Schema({
-  username: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true}
+  username: {type: String, required: [true, 'Please provide your username']},
+  email: {type: String, required: [true, 'Please provide your email'], unique: true},
+  password: {type: String, required: [true, 'Please provide your password']}
 })
 
 UserSchema.pre('save', function(next) {
