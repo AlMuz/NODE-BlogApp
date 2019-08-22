@@ -5,7 +5,10 @@ const Post = require(appDir + '/database/models/Post');
 
 module.exports = {
   new: function(req, res){
-    res.render('create')
+    if (req.session.userId) {
+      return res.render('create')
+    }
+    res.redirect('/')
   },
   view: async function(req, res){
     const post = await Post.findById(req.params.id)
