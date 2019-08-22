@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const edge = require('edge.js');
 const expressEdge = require('express-edge');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
@@ -25,6 +26,11 @@ app.use(expressSession({
 }));
 
 app.set('views', `${__dirname}/views`);
+
+app.use('*', (req, res, next) => {
+  edge.global('auth', req.session.userId);
+  next();
+})
 
 routes(app)
 app.listen(5555, () => {
