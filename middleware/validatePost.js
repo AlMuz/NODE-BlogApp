@@ -3,8 +3,7 @@ module.exports = (req, res, next) => {
       !req.file ||
       !req.body.title ||
       !req.body.description ||
-      !req.body.content ||
-      !req.body.username
+      !req.body.content
     ) {
       return res.redirect('/post/new');
   }
