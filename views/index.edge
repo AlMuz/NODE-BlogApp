@@ -33,16 +33,16 @@
             </h3>
           </a>
           <p class="post-meta">
-            <a href="#">{{ post.author.username }}</a>
+            <span>{{ post.author.username }}<span>
             on {{ post.createdAt.toDateString() }}
           </p>
         </div>
         <hr>
       @endeach
       <!-- Pager -->
-      <div class="clearfix">
+      <!-- <div class="clearfix">
         <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
