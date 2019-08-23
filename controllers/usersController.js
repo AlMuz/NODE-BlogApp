@@ -15,6 +15,7 @@ module.exports = {
     User.create(req.body, (error, post) => {
 
       if (error) {
+        console.log(error);
         const regErrors = Object.keys(error.errors).map(key => error.errors[key].message);
 
         req.flash('regErrors', regErrors);
@@ -26,7 +27,9 @@ module.exports = {
     })
   },
   login: function(req, res){
-    res.render('login')
+    res.render('login', {
+      errors: req.flash('logErrors')
+    })
   },
   doLogin: function(req, res) {
 
@@ -41,10 +44,16 @@ module.exports = {
             req.session.userId = user._id;
             return res.redirect('/')
           }else {
+            logErrors = ['Incorrect password'];
+            req.flash('logErrors', logErrors);
+
             return res.redirect('/users/login')
           }
         })
       }else {
+        logErrors = ['User not found'];
+        req.flash('logErrors', logErrors);
+
         return res.redirect('/users/login')
       }
     })
