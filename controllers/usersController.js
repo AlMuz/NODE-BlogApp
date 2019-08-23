@@ -15,8 +15,12 @@ module.exports = {
     User.create(req.body, (error, post) => {
 
       if (error) {
-        console.log(error);
-        const regErrors = Object.keys(error.errors).map(key => error.errors[key].message);
+
+        if (error.code === 11000) {
+          var regErrors = ['This email is already taken!'];
+        }else {
+          var regErrors = Object.keys(error.errors).map(key => error.errors[key].message);
+        }
 
         req.flash('regErrors', regErrors);
         req.flash('data', req.body);
