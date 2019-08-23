@@ -11,7 +11,7 @@ module.exports = {
     res.redirect('/')
   },
   view: async function(req, res){
-    const post = await Post.findById(req.params.id)
+    const post = await Post.findById(req.params.id).populate('author');
     res.render('post', {
       post
     })
@@ -19,6 +19,7 @@ module.exports = {
   create: function(req, res){
     Post.create({
       ...req.body,
+      author: req.session.userId,
       image: `/posts/${req.file.filename}`
     }, (error, post) => {
       res.redirect('/')
