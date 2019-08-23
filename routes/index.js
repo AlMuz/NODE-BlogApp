@@ -37,4 +37,5 @@ module.exports = function (app) {
 
   app.post('/posts/store', auth, upload.single('image'), validateCreatePostMiddleware, postsController.create)
 
+  app.use((req, res) => { res.status(404).render('404') })
 }
