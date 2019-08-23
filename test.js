@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 const Post = require('./database/models/Post')
+const { parsed } = require('dotenv').config();
 
+const hostName = parsed.MONGO_HOST_NAME;
+const port = 27017;
+const dbName = parsed.MONGO_DB_NAME;
 
-mongoose.connect('mongodb://database-service:27017/node-blog-app-test', {useNewUrlParser: true } )
-
+mongoose.connect(`mongodb://${hostName}:${port}/${dbName}`, {useNewUrlParser: true } )
 
 // Creating data
 // Post.create({
