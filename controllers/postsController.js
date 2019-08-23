@@ -6,7 +6,10 @@ const Post = require(appDir + '/database/models/Post');
 module.exports = {
   new: function(req, res){
     if (req.session.userId) {
-      return res.render('create')
+      return res.render('create', {
+        errors: req.flash('postErrors'),
+        data: req.flash('data')[0]
+      })
     }
     res.redirect('/')
   },

@@ -18,17 +18,24 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
+        @if(errors.length > 0)
+          <ul class="list-group">
+            @each(error in errors)
+              <li class="list-group-item text-danger">{{ error }}</li>
+            @endeach
+          </ul>
+        @endif
         <form action="/posts/store" method="post" enctype="multipart/form-data">
           <div class="control-group">
             <div class="form-group floating-label-form-group controlls">
               <label for="title">Title</label>
-              <input type="text" placeholder="Title" name="title" class="form-control">
+              <input type="text" placeholder="Title" name="title" class="form-control" value="{{ data.title || '' }}">
             </div>
           </div>
           <div class="control-group">
             <div class="form-group floating-label-form-group controlls">
               <label for="description">Description</label>
-              <input type="text" placeholder="Description" name="description" class="form-control">
+              <input type="text" placeholder="Description" name="description" class="form-control" value="{{ data.description || '' }}">
             </div>
           </div>
           <div class="control-group">
